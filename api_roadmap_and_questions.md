@@ -29,7 +29,7 @@ would it be helpful to return a response to the user of API with any of the foll
     - seconds till date ?
 That way the view layer can simply focus on displaying these attributes. If they are present.
 
-2. Should I instead break up the saving of DateTime into chuncks? Such that I could ask a user for YYYY, DD, MM. Not sure if doing it this way will be more problematic or less so. Since it would mean I could limit each field in db to year, month, day... I could be meaningful constraints upon incoming data.
+2. Should I instead break up the saving of DateTime into chuncks? Such that I could ask a user for YYYY, DD, MM. Not sure if doing it this way will be more problematic or less so. Since it would mean I could use attributes: year, month, day and I could give meaningful tight constraints upon this incoming data.
     - year (can only be 4 digits)
     - month (can only be 1 - 12)
     - day (can only be 1 - 31)
