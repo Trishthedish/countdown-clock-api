@@ -10,7 +10,6 @@ countdown_event_bp = Blueprint("countdown_event", __name__, url_prefix="/countdo
 def hello_world():
     return 'Hello from Flask!'
 
-
 @countdown_event_bp.route("", methods=["GET", "POST"])
 def handle_countdown_events():
     if request.method == "GET":
@@ -37,4 +36,29 @@ def handle_countdown_events():
         )
         db.session.add(new_countdown)
         db.session.commit()
-        return jsonify(f"Countdown Event:  {new_countdown.title} succesfully created."), 201
+        return jsonify(f"Countdown Event: {new_countdown.title} succesfully created."), 201
+
+@countdown_event_bp.route("/<countdown_event_id>", methods=["GET", "PUT", "DELETE"])
+def handle_countdown_event(countdown_event_id):
+    countdown_event = CountdownEvent.query.get(countdown_event_id)
+
+    if countdown_event is None:
+        return make_response("", 404)
+
+    if request.method == "GET":
+        return {
+            "id": countdown_event.id,
+            "title": countdown_event.title,
+            "timeTillEvent": countdown_event.countdown_till_date
+        }
+    elif request.method == "PUT":
+        form_data = request.get_json()
+        countdown_event.title = form_data["title"]
+        countdown_event.countdown_till_date=["countdown_till_date"]
+        db.session.commit()
+        return make_response(f"Countdown Event: #{countdown_event.id} succesfully updated.")
+
+    elif request.method == "DELETE":
+        db.session.delete(countdown_event)
+        db.session.commit()
+        return make_response(f"Countdown Event: #{countdown_event.id} succesfully deleted.")
