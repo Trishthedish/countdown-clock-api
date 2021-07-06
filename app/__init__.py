@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from dotenv import load_dotenv
@@ -32,5 +32,9 @@ def create_app(test_config=None):
 
     from .routes import hello_world_bp
     app.register_blueprint(hello_world_bp)
+
+    @app.route("/")
+    def index():
+        return render_template("index.html")
 
     return app

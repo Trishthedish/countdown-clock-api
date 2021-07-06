@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+        <title>Countdown Event API</title>
+    </head>
+
+    <body>
+        <main class="WHY">
+            <h1>Available Routes</h1>
+            <table id="styled-table">
+                <thead>
+                    <tr>
+                        <th>PATH</th>
+                        <th>METHOD</th>
+                        <th>REQUEST BODY</th>
+                        <th>DESCRIPTION</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>/coundown</td>
+                        <td>GET</td>
+                        <td>N/A</td>
+                        <td>
+                            Get all countdown events.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>/coundown</td>
+                        <td>POST</td>
+                        <td>"title", "countdown_till_date"</td>
+                        <td>Create a countdown event title cannot be null</td>
+                    </tr>
+                    <tr>
+                        <td>/coundown/id&gt</td>
+                        <td>GET</td>
+                        <td>N/A</td>
+                        <td>Get details for single countdown event</td>
+                    </tr>
+                    <tr>
+                        <td>/countdown/id&gt</td>
+                        <td>PUT</td>
+                        <td>'title', 'countdown_till_date'</td>
+                        <td>Update details for a single countdown event.</td>
+                    </tr>
+                    <tr>
+                        <td>/countdown/id&gt</td>
+                        <td>DELETE</td>
+                        <td>N/A</td>
+                        <td>Delete a single countdown event</td>
+                    </tr>
+                </tbody>
+            </table>
+           
+        </main>
+    </body>
+    
+
+</html>
