@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from dotenv import load_dotenv
 import os
+from flask_cors import CORS
 
 db = SQLAlchemy()
 migrate = Migrate()
@@ -37,4 +38,5 @@ def create_app(test_config=None):
     def index():
         return render_template("index.html")
 
+    CORS(app)
     return app
