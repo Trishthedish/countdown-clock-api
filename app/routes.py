@@ -66,7 +66,7 @@ def handle_countdown_event(countdown_event_id):
         return make_response(f"Countdown Event: #{countdown_event.id} succesfully deleted.")
 
 # `/users` will now return an empty array or array of user objects`
-@users_bp.route("", methods=["GET"])
+@users_bp.route("", methods=["GET", "POST"])
 def handle_users():
     if request.method == "GET":
         users = User.query.all()
@@ -77,6 +77,23 @@ def handle_users():
             users_response.append({
                 "user_id": user.user_id,
                 "creation_date": user.creation_date,
+                "name": user.name
             })
 
         return jsonify(users_response)
+    elif request.method == "POST":
+        request_body = request.get_json()
+        # need to add some attribute to hold something like a name for a user.
+        new_user =  User(
+            name=request_body["name"]
+        )
+        db.session.add(new_user)
+        db.session.commit()
+
+        return make_response({
+            "user": {
+                "user_id": new_user.user_id,
+                "creation_date": new_user.creation_date,
+                "name": new_user.name
+            }
+        }, 201)
