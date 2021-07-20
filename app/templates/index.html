@@ -9,8 +9,9 @@
     </head>
 
     <body>
-        <main class="WHY">
-            <h1>Available Routes</h1>
+        <main class="routes-table">
+            <h1 class="route-title">Available Routes</h1>
+            <h2 class="route-title">All Countdown Event Routes</h2>
             <table id="styled-table">
                 <thead>
                     <tr>
@@ -22,36 +23,84 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>/coundown</td>
+                        <td>/coundowns</td>
                         <td>GET</td>
                         <td>N/A</td>
                         <td>
-                            Get all countdown events.
+                            Get all countdown_events
                         </td>
                     </tr>
                     <tr>
-                        <td>/coundown</td>
+                        <td>/coundowns</td>
                         <td>POST</td>
                         <td>"title", "countdown_till_date"</td>
-                        <td>Create a countdown event title cannot be null</td>
+                        <td>Create a countdown event</td>
                     </tr>
                     <tr>
-                        <td>/coundown/id&gt</td>
+                        <td>/coundowns/&ltid&gt</td>
                         <td>GET</td>
                         <td>N/A</td>
-                        <td>Get details for single countdown event</td>
+                        <td>Get details for a countdown_event by ID</td>
                     </tr>
                     <tr>
-                        <td>/countdown/id&gt</td>
+                        <td>/countdowns/&ltid&gt</td>
                         <td>PUT</td>
-                        <td>'title', 'countdown_till_date'</td>
-                        <td>Update details for a single countdown event.</td>
+                        <td>"title", "countdown_till_date"</td>
+                        <td>Update details for a countdown_event by ID</td>
                     </tr>
                     <tr>
-                        <td>/countdown/id&gt</td>
+                        <td>/countdowns/&ltid&gt</td>
                         <td>DELETE</td>
                         <td>N/A</td>
-                        <td>Delete a single countdown event</td>
+                        <td>Delete a countdown_event by ID</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2 class="route-title">All User routes</h2>
+            <table id="styled-table">
+                <thead>
+                    <tr>
+                        <th class="table-head">PATH</th>
+                        <th>METHOD</th>
+                        <th>REQUEST BODY</th>
+                        <th>DESCRIPTION</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>/users</td>
+                        <td>GET</td>
+                        <td>N/A</td>
+                        <td>
+                            Get all Users
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>/users</td>
+                        <td>POST</td>
+                        <td>"name"</td>
+                        <td>
+                            Create a new user
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>/users/&ltuser_id&gt</td>
+                        <td>GET</td>
+                        <td>N/A</td>
+                        <td>Get details a user by ID</td>
+                    </tr>
+                    <tr>
+                        <td>/users/&ltuser_id&gt</td>
+                        <td>PUT</td>
+                        <td>"name"</td>
+                        <td>Update user name by ID</td>
+                    </tr>
+                    <tr>
+                        <td>/users/&ltuser_id&gt</td>
+                        <td>DELETE</td>
+                        <td>N/A</td>
+                        <td>Delete a user by ID</td>
                     </tr>
                 </tbody>
             </table>
