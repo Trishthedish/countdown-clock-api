@@ -5,7 +5,7 @@ from flask import request, Blueprint, make_response, jsonify
 
 hello_world_bp = Blueprint("hello_world", __name__, url_prefix="/hello")
 
-countdown_event_bp = Blueprint("countdown_event", __name__, url_prefix="/countdown")
+countdown_event_bp = Blueprint("countdown_event", __name__, url_prefix="/countdowns")
 users_bp = Blueprint('user', __name__, url_prefix="/users")
 
 @hello_world_bp.route("", methods=["GET"])
