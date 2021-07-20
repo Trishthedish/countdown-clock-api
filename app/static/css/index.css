@@ -1,6 +1,15 @@
-* {
-    background-color: coral;
+.routes-table {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
-.styled-table {
+
+.route-title {
+    display: flex;
+    justify-content: center;
+}
+
+#styled-table {
     background-color: chartreuse;
+    text-align: center;
 }
