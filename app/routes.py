@@ -1,10 +1,12 @@
 from app import db
 from app.models.countdown_event import CountdownEvent
+from app.models.user import User
 from flask import request, Blueprint, make_response, jsonify
 
 hello_world_bp = Blueprint("hello_world", __name__, url_prefix="/hello")
 
 countdown_event_bp = Blueprint("countdown_event", __name__, url_prefix="/countdown")
+users_bp = Blueprint('user', __name__, url_prefix="/user")
 
 @hello_world_bp.route("", methods=["GET"])
 def hello_world():

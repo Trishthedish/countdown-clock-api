@@ -24,14 +24,18 @@ def create_app(test_config=None):
             "SQLALCHEMY_TEST_DATABASE_URI"
         )
     
+    from app.models.countdown_event import CountdownEvent
+    from app.models.user import User
+    
     db.init_app(app)
     migrate.init_app(app, db)
 
-    from app.models.countdown_event import CountdownEvent
     from .routes import countdown_event_bp
-    app.register_blueprint(countdown_event_bp)
-
+    from .routes import users_bp
     from .routes import hello_world_bp
+
+    app.register_blueprint(countdown_event_bp)
+    app.register_blueprint(users_bp)
     app.register_blueprint(hello_world_bp)
 
     @app.route("/")
