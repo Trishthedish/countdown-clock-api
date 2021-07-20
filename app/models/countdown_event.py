@@ -7,4 +7,4 @@ class CountdownEvent(db.Model):
     title = db.Column(db.String)
     countdown_till_date = db.Column(db.DateTime)
     creation_date = db.Column(db.DateTime, default=datetime.utcnow)
-    # user_id = db.Column(db.Integer, db.ForeignKey("user.user_id"), nullable=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("user.user_id"), nullable=True)
