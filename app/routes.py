@@ -3,15 +3,11 @@ from app.models.countdown_event import CountdownEvent
 from app.models.user import User
 from flask import request, Blueprint, make_response, jsonify
 
-hello_world_bp = Blueprint("hello_world", __name__, url_prefix="/hello")
-
 countdown_event_bp = Blueprint("countdown_event", __name__, url_prefix="/countdowns")
 users_bp = Blueprint('user', __name__, url_prefix="/users")
 
-@hello_world_bp.route("", methods=["GET"])
-def hello_world():
-    return 'Hello from Flask!'
 
+#Countdown Event Routes
 @countdown_event_bp.route("", methods=["GET", "POST"])
 def handle_countdown_events():
     if request.method == "GET":
@@ -65,7 +61,7 @@ def handle_countdown_event(countdown_event_id):
         db.session.commit()
         return make_response(f"Countdown Event: #{countdown_event.id} succesfully deleted.")
 
-# `/users` will now return an empty array or array of user objects`
+# Users Routes
 @users_bp.route("", methods=["GET", "POST"])
 def handle_users():
     if request.method == "GET":
@@ -97,3 +93,42 @@ def handle_users():
                 "name": new_user.name
             }
         }, 201)
+
+@users_bp.route("/<user_id>", methods=["GET", "PUT", "DELETE"])
+def handle_user(user_id):
+    user = User.query.get(user_id)
+
+    if user is None:
+        return make_response("", 404)
+
+    if request.method == "GET":
+        return make_response({
+            "user": {
+                "id": user.user_id,
+                "name": user.name,
+                "creation_date": user.creation_date
+            }
+        })
+
+    elif request.method == "PUT":
+        form_data = request.get_json()
+        user.name = form_data["name"]
+        db.session.commit()
+
+        user_response = {
+            "user": {
+                "id": user.user_id,
+                "name": user.name
+            }
+        }
+        return make_response(user_response, 200)
+
+    elif request.method == "DELETE":
+        db.session.delete(user)
+        db.session.commit()
+
+        return make_response(
+            {
+                "details": f"User with user_id: {user.user_id}  and name: \"{user.name}\" successfully deleted"
+            }
+        )
