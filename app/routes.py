@@ -6,7 +6,7 @@ from flask import request, Blueprint, make_response, jsonify
 hello_world_bp = Blueprint("hello_world", __name__, url_prefix="/hello")
 
 countdown_event_bp = Blueprint("countdown_event", __name__, url_prefix="/countdown")
-users_bp = Blueprint('user', __name__, url_prefix="/user")
+users_bp = Blueprint('user', __name__, url_prefix="/users")
 
 @hello_world_bp.route("", methods=["GET"])
 def hello_world():
@@ -64,3 +64,19 @@ def handle_countdown_event(countdown_event_id):
         db.session.delete(countdown_event)
         db.session.commit()
         return make_response(f"Countdown Event: #{countdown_event.id} succesfully deleted.")
+
+# `/users` will now return an empty array or array of user objects`
+@users_bp.route("", methods=["GET"])
+def handle_users():
+    if request.method == "GET":
+        users = User.query.all()
+        print('users ----> ', users)
+
+        users_response = []
+        for user in users:
+            users_response.append({
+                "user_id": user.user_id,
+                "creation_date": user.creation_date,
+            })
+
+        return jsonify(users_response)
