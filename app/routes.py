@@ -11,7 +11,8 @@ users_bp = Blueprint('user', __name__, url_prefix="/users")
 @countdown_event_bp.route("", methods=["GET", "POST"])
 def handle_countdown_events():
     if request.method == "GET":
-        countdown_events = CountdownEvent.query.all()
+        # Adding order_by to query ensures that countdowns display properly
+        countdown_events = CountdownEvent.query.order_by(CountdownEvent.id).all()
 
         countdown_events_response = []
         for countdown in countdown_events:
@@ -52,7 +53,7 @@ def handle_countdown_event(countdown_event_id):
     elif request.method == "PUT":
         form_data = request.get_json()
         countdown_event.title = form_data["title"]
-        countdown_event.countdown_till_date=["countdown_till_date"]
+        countdown_event.countdown_till_date=form_data["countdown_till_date"]
         db.session.commit()
         return make_response(f"Countdown Event: #{countdown_event.id} succesfully updated.")
 
@@ -66,8 +67,6 @@ def handle_countdown_event(countdown_event_id):
 def handle_users():
     if request.method == "GET":
         users = User.query.all()
-        print('users ----> ', users)
-
         users_response = []
         for user in users:
             users_response.append({
@@ -79,7 +78,6 @@ def handle_users():
         return jsonify(users_response)
     elif request.method == "POST":
         request_body = request.get_json()
-        # need to add some attribute to hold something like a name for a user.
         new_user =  User(
             name=request_body["name"]
         )
